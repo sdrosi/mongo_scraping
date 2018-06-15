@@ -1,21 +1,5 @@
-
-$(function() {
-
-$(document).on("click", ".scrape_articles", function() {
-  console.log("You scraped me!");
-  $.ajax({
-    method: "GET",
-    url: "/scrape" 
-  })
-  .then(function(data) {
-    console.log("New articles scraped");
-    // location.reload();
-  })
-
-  
-});
-
-$.getJSON("/articles", function(data) {
+function load(){
+  $.getJSON("/articles", function(data) {
   console.log("we got here");
   // For each one
   for (var i = 0; i < data.length; i++) {
@@ -27,7 +11,23 @@ $.getJSON("/articles", function(data) {
       data[i].link + "</p>" + 
       "<hr>");  }
 });
+};
 
+
+$(document).on("click", ".scrape_articles", function() {
+  console.log("You scraped me!");
+  $.ajax({
+    method: "GET",
+    url: "/scrape" 
+  })
+  .then(function(data) {
+    console.log("New articles scraped");
+    load();
+    location.reload();
+  })
+load();
+  
+});
 
   // Deletes all of the articles saved to the db. Clears the page fully. 
   $(document).on("click", ".clear_articles", function() {
@@ -104,5 +104,4 @@ $(document).on("click", "#savenote", function() {
   $("#bodyinput").val("");
 });
 
-
-});
+load();
