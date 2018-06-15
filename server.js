@@ -15,7 +15,7 @@ var exphbs = require("express-handlebars");
 
 // Require all models
 var Article = require("./models/article.js");
-
+var Notes = require("./models/note.js");
 var PORT = 3000;
 
 // Initialize Express
@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/public', express.static(__dirname + "/public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/news");
+mongoose.connect("mongodb://localhost/articles");
 
 // Routes
 
