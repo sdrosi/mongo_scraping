@@ -115,6 +115,16 @@ app.get("/articles/:id", function(req, res) {
     });
 });
 
+app.post("/articles/delete/all", function(req, res) {
+  Article.remove({})
+  .then(function(data) {
+    res.json(data);
+  })
+  .catch(function(err) {
+    res.json(err)
+  })
+})
+
 // Route for saving/updating an Article's associated Note
 app.post("/articles/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry

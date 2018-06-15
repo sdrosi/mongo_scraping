@@ -1,5 +1,22 @@
-// Grab the articles as a json
+
+$(function() {
+
+$(document).on("click", ".scrape_articles", function() {
+  console.log("You scraped me!");
+  $.ajax({
+    method: "GET",
+    url: "/scrape" 
+  })
+  .then(function(data) {
+    console.log("New articles scraped");
+    // location.reload();
+  })
+
+  
+});
+
 $.getJSON("/articles", function(data) {
+  console.log("we got here");
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
@@ -11,16 +28,18 @@ $.getJSON("/articles", function(data) {
       "<hr>");  }
 });
 
-$(document).on("click", ".scrape_articles", function() {
-  $.ajax({
-    method: "GET",
-    url: "/scrape" 
-  })
-  .then(function(data) {
-    console.log("New articles scraped");
-    location.reload();
-  })
-});
+
+  // Deletes all of the articles saved to the db. Clears the page fully. 
+  $(document).on("click", ".clear_articles", function() {
+    $.ajax({
+      method: "POST",
+      url: "/articles/delete/all" 
+    })
+    .then(function(data) {
+      console.log("All articles deleted");
+      location.reload();
+    })
+  });
 
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
@@ -83,4 +102,7 @@ $(document).on("click", "#savenote", function() {
   // Also, remove the values entered in the input and textarea for note entry
   $("#titleinput").val("");
   $("#bodyinput").val("");
+});
+
+
 });
