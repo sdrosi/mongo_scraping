@@ -35,7 +35,8 @@ app.use('/public', express.static(__dirname + "/public"));
 // Connect to the Mongo DB
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/articles";
 
-// mongoose.connect("mongodb://localhost/articles");
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 // Routes
 
