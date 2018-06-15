@@ -11,6 +11,16 @@ $.getJSON("/articles", function(data) {
       "<hr>");  }
 });
 
+$(document).on("click", ".scrape_articles", function() {
+  $.ajax({
+    method: "GET",
+    url: "/scrape" 
+  })
+  .then(function(data) {
+    console.log("New articles scraped");
+    location.reload();
+  })
+});
 
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
